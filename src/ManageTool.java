@@ -118,11 +118,16 @@ public class ManageTool extends JFrame implements ActionListener {
 		itemConfig.addActionListener(this);
         
         //从配置文件读取日志路径，若果不存在重新设置，否则加载数据
-        if(getPathFromInfo() == null){
+		File infoFile = new File(infFileName);
+		if(infoFile.exists()){
+	        if(getPathFromInfo() == null){
+	            resetLogPath();
+	        }else{
+	        	reloadData();
+	        }
+		}else{
             resetLogPath();
-        }else{
-        	reloadData();
-        }
+		}
 	}
 	
 	private void refishPathData(){
