@@ -130,18 +130,19 @@ public class ManageTool extends JFrame implements ActionListener {
 		}
 	}
 	
-	private void refishPathData(){
+	private void refrishPathData(){
 		Set<String> pathSet = this.curentDateFile.keySet();
 		String[] pathList =  pathSet.toArray(new String[pathSet.size()]);
 		listPath.setListData(pathList);
 		listPath.setSelectedIndex(0);
+		resetTitleWithFileName("");
 	}
 	
 	public void reloadData(){
 		setData4Views();
 		setHostDateFile();
 		this.curentDateFile = dateHostFile;//hostDateFile
-		refishPathData();
+		refrishPathData();
 	}
 	
 	private void resetLogPath(){
@@ -248,7 +249,7 @@ public class ManageTool extends JFrame implements ActionListener {
 				setViewData4HostDate();
 				break;
 			}
-			refishPathData();
+			refrishPathData();
 		}
 	}
 	
@@ -290,6 +291,7 @@ public class ManageTool extends JFrame implements ActionListener {
 				}else{
 					listFileName.setListData(new String[0]);
 				}
+				resetTitleWithFileName("");
 				txtContent.setText("");
 				lastSelectedIndex = listSubpath.getSelectedIndex();
 			}
@@ -315,6 +317,7 @@ public class ManageTool extends JFrame implements ActionListener {
 				}else{
 					openFile(logPath+"/"+subpath+"/"+path+"/"+fileName);
 				}
+				resetTitleWithFileName(fileName);
 				lastSelectedIndex = listFileName.getSelectedIndex();
 			}
 		}
@@ -336,6 +339,14 @@ public class ManageTool extends JFrame implements ActionListener {
 			} catch (Exception ex) {
 				ex.printStackTrace();
 			}
+		}
+	}
+	
+	private void resetTitleWithFileName(String fileName){
+		if(fileName.length()>0){
+			setTitle("日志管理-"+fileName);
+		}else{
+			setTitle("日志管理");
 		}
 	}
 	
